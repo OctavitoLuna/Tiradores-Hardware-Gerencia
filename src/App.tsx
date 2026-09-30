@@ -9,6 +9,7 @@ import Organigrama from './pages/Organigrama';
 import MBTI from './pages/MBTI';
 import Scrum from './pages/Scrum';
 import IDEF0 from './pages/IDEF0';
+import BPMN from './pages/BPMN';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="mbti" element={<MBTI />} />
           <Route path="scrum" element={<Scrum />} />
           <Route path="idef0" element={<IDEF0 />} />
+          <Route path="bpmn" element={<BPMN />} />
         </Route>
       </Routes>
     </BrowserRouter>

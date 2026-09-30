@@ -18,6 +18,7 @@ export default function Layout() {
     { name: 'MBTI', path: '/mbti' },
     { name: 'Scrum', path: '/scrum' },
     { name: 'IDEF0', path: '/idef0' },
+    { name: 'BPMN', path: '/bpmn' },
   ];
 
   return (
