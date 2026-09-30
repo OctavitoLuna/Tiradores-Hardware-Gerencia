@@ -265,118 +265,36 @@ export default function Home() {
       </section>
       </FadeIn>
 
-      {/* Sistema de Inventario de Hardware */}
+      {/* Sistema de Inventario de Hardware (Versión concisa) */}
       <FadeIn delay={0.1}>
-      <section className="section-padding bg-surface text-foreground-inverse border-t-8 border-primary relative overflow-hidden">
-        {/* Background decorative watermark */}
-        <div className="absolute top-1/2 right-6 -translate-y-1/2 opacity-5 pointer-events-none">
-          <Boxes size={400} />
-        </div>
+      <section className="py-16 bg-surface text-foreground-inverse border-t-4 border-primary">
+        <div className="container-wide max-w-4xl text-center space-y-6">
+          <div className="flex items-center justify-center gap-3">
+            <span className="w-8 h-1 bg-primary block"></span>
+            <span className="text-primary font-bold tracking-widest uppercase text-xs">
+              Plataforma Operativa
+            </span>
+            <span className="w-8 h-1 bg-primary block"></span>
+          </div>
 
-        <div className="container-wide relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Left Column: Text & Features */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-1 bg-primary block"></span>
-                <span className="text-primary font-bold tracking-widest uppercase text-xs">
-                  Plataforma Operativa • Tiradores & IATECH Co.
-                </span>
-              </div>
+          <h2 className="text-3xl md:text-5xl font-display text-white">
+            Sistema de Inventario de <span className="text-primary">Hardware</span>
+          </h2>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display tracking-wide text-white leading-tight">
-                Sistema de Inventario de <span className="text-primary">Hardware</span>
-              </h2>
+          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-sans">
+            Accede a nuestra plataforma web para el control de inventario, activos y equipamiento de infraestructura en tiempo real.
+          </p>
 
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed font-sans">
-                Para garantizar la trazabilidad total y el control operativo de todos los componentes que sostienen la infraestructura de salud digital, el equipo cuenta con una plataforma web especializada en gestión de inventario en tiempo real.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-1 shrink-0" size={18} />
-                  <div>
-                    <h4 className="text-white font-bold text-sm">Control de Activos y Servidores</h4>
-                    <p className="text-gray-400 text-xs mt-0.5">Registro minucioso de hardware físico, números de serie y especificaciones.</p>
-                  </div>
-                </div>
-
-                <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-1 shrink-0" size={18} />
-                  <div>
-                    <h4 className="text-white font-bold text-sm">Ciclo de Vida y Mantenimiento</h4>
-                    <p className="text-gray-400 text-xs mt-0.5">Control de garantías, estado operativo y fechas de mantenimiento preventivo.</p>
-                  </div>
-                </div>
-
-                <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-1 shrink-0" size={18} />
-                  <div>
-                    <h4 className="text-white font-bold text-sm">Asignación por Roles y Áreas</h4>
-                    <p className="text-gray-400 text-xs mt-0.5">Trazabilidad de equipamiento entregado a clientes internos y personal clínico.</p>
-                  </div>
-                </div>
-
-                <div className="bg-white/5 border border-white/10 p-4 rounded-lg flex items-start gap-3">
-                  <CheckCircle2 className="text-primary mt-1 shrink-0" size={18} />
-                  <div>
-                    <h4 className="text-white font-bold text-sm">Acceso Seguro y Gobernanza</h4>
-                    <p className="text-gray-400 text-xs mt-0.5">Autenticación protegida para el equipo técnico autorizado.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Botón hacia la aplicación externa en nueva pestaña */}
-              <div className="pt-4">
-                <a 
-                  href="https://iatech-co-frontend.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary inline-flex items-center gap-3 text-base px-8 py-4 shadow-xl hover:scale-105 transition-all group"
-                >
-                  <span>Acceder al Sistema de Inventario</span>
-                  <ExternalLink size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </a>
-                <span className="block text-xs text-gray-400 mt-2 font-mono">
-                  Abre en nueva pestaña: https://iatech-co-frontend.vercel.app/
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column: Visual Preview Card */}
-            <div className="lg:col-span-5">
-              <div className="bg-white/5 border border-white/15 p-6 rounded-2xl backdrop-blur-sm relative shadow-2xl">
-                <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                  </div>
-                  <span className="text-[11px] font-mono text-gray-400">iatech-co-frontend.vercel.app</span>
-                </div>
-
-                <div className="bg-surface/90 p-6 rounded-xl border border-white/10 text-center space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-primary/20 text-primary flex items-center justify-center mx-auto border border-primary/40 shadow-inner">
-                    <Database size={32} />
-                  </div>
-                  <h3 className="text-xl font-display text-white">Portal de Inventario IATECH</h3>
-                  <p className="text-xs text-gray-400 leading-relaxed max-w-xs mx-auto font-sans">
-                    Inicie sesión con sus credenciales institucionales para gestionar inventario de servidores, redes y dispositivos biomédicos.
-                  </p>
-                  <a
-                    href="https://iatech-co-frontend.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center w-full py-3 px-4 bg-primary hover:bg-primary-hover text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors gap-2 shadow-md"
-                  >
-                    <span>Ingresar a la Plataforma</span>
-                    <ExternalLink size={14} />
-                  </a>
-                </div>
-              </div>
-            </div>
-
+          <div className="pt-2">
+            <a 
+              href="https://iatech-co-frontend.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-flex items-center gap-3 text-sm md:text-base px-8 py-3.5 shadow-lg hover:scale-105 transition-all group"
+            >
+              <span>Acceder al Sistema de Inventario</span>
+              <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
         </div>
       </section>
