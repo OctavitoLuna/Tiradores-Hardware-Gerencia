@@ -19,12 +19,16 @@ import {
   Cpu,
   Clock,
   Activity,
-  AlertCircle
+  AlertCircle,
+  ZoomIn,
+  ZoomOut,
+  X
 } from 'lucide-react';
 
 export default function BPMN() {
   const [imageSrc, setImageSrc] = useState('/bpmn-diagram.svg');
   const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomScale, setZoomScale] = useState(1);
   const [selectedLane, setSelectedLane] = useState<string | null>(null);
 
   const laneBreakdown = [
@@ -473,8 +477,11 @@ export default function BPMN() {
 
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => setIsZoomed(!isZoomed)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-stone-100 text-surface text-xs font-semibold rounded-md border border-stone-300 transition-colors shadow-sm"
+                      onClick={() => {
+                        setIsZoomed(!isZoomed);
+                        setZoomScale(1);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-stone-100 text-surface text-xs font-semibold rounded-md border border-stone-300 transition-colors shadow-sm cursor-pointer"
                       title={isZoomed ? "Reducir vista" : "Ver en pantalla completa"}
                     >
                       {isZoomed ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
@@ -492,8 +499,14 @@ export default function BPMN() {
                   </div>
                 </div>
 
-                {/* IMAGEN DEL DIAGRAMA CENTRADA */}
-                <div className="relative w-full overflow-hidden rounded-xl bg-[#F8F5EE] border border-stone-200/80 p-2 sm:p-4 flex items-center justify-center min-h-[380px] md:min-h-[500px]">
+                {/* IMAGEN DEL DIAGRAMA CENTRADA (CLICKABLE PARA AMPLIAR) */}
+                <div 
+                  onClick={() => {
+                    setIsZoomed(true);
+                    setZoomScale(1);
+                  }}
+                  className="relative w-full overflow-hidden rounded-xl bg-[#F8F5EE] border border-stone-200/80 p-2 sm:p-4 flex items-center justify-center min-h-[380px] md:min-h-[500px] cursor-pointer group"
+                >
                   <img
                     src={imageSrc}
                     onError={() => {
@@ -503,8 +516,14 @@ export default function BPMN() {
                     }}
                     alt="Diagrama BPMN Gestión de Solicitud de Infraestructura Tecnológica"
                     referrerPolicy="no-referrer"
-                    className="w-full h-auto max-h-[650px] object-contain rounded-lg transition-transform duration-300 shadow-md"
+                    className="w-full h-auto max-h-[650px] object-contain rounded-lg transition-transform duration-300 shadow-md group-hover:scale-[1.01]"
                   />
+                  
+                  {/* Badge flotante de ayuda */}
+                  <div className="absolute bottom-4 right-4 bg-surface/85 hover:bg-surface text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 transition-all group-hover:scale-105 backdrop-blur-xs">
+                    <Maximize2 size={13} className="text-primary" />
+                    <span>Haz clic para ampliar</span>
+                  </div>
                 </div>
 
                 {/* Pie de foto de la tarjeta */}
@@ -519,34 +538,91 @@ export default function BPMN() {
                 </div>
               </div>
 
-              {/* MODAL ZOOM */}
+              {/* MODAL ZOOM CON CONTROLES AVANZADOS */}
               {isZoomed && (
                 <div 
-                  className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex flex-col items-center justify-center p-4 md:p-8"
+                  className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-2 sm:p-4 md:p-6"
                   onClick={() => setIsZoomed(false)}
                 >
                   <div 
-                    className="bg-[#FAF7F2] p-4 sm:p-6 rounded-2xl max-w-6xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden"
+                    className="bg-[#FAF7F2] p-4 sm:p-6 rounded-2xl max-w-7xl w-full h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-stone-300"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <div className="flex justify-between items-center mb-4 pb-2 border-b border-stone-300">
-                      <h4 className="font-display font-bold text-xl text-surface">
-                        Vista Ampliada — BPMN: Gestión de Solicitud de Infraestructura
-                      </h4>
-                      <button 
-                        onClick={() => setIsZoomed(false)}
-                        className="p-2 bg-stone-200 hover:bg-stone-300 rounded-full transition-colors"
-                      >
-                        <Minimize2 size={18} />
-                      </button>
+                    <div className="flex flex-wrap justify-between items-center mb-4 pb-3 border-b border-stone-300 gap-3">
+                      <div>
+                        <h4 className="font-display font-bold text-lg md:text-xl text-surface">
+                          Vista Ampliada — BPMN: Gestión de Solicitud de Infraestructura
+                        </h4>
+                        <p className="text-xs text-foreground-muted font-sans">
+                          Usa los controles de zoom o la rueda del ratón para inspeccionar cada carril y actividad
+                        </p>
+                      </div>
+
+                      {/* Controles de Zoom */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center bg-white border border-stone-300 rounded-lg p-1 shadow-sm">
+                          <button
+                            onClick={() => setZoomScale(Math.max(0.6, zoomScale - 0.2))}
+                            className="p-1.5 hover:bg-stone-100 rounded text-surface transition-colors cursor-pointer"
+                            title="Reducir (-) zoom"
+                          >
+                            <ZoomOut size={16} />
+                          </button>
+                          <span className="px-3 text-xs font-mono font-bold text-surface min-w-[50px] text-center">
+                            {Math.round(zoomScale * 100)}%
+                          </span>
+                          <button
+                            onClick={() => setZoomScale(Math.min(2.5, zoomScale + 0.2))}
+                            className="p-1.5 hover:bg-stone-100 rounded text-surface transition-colors cursor-pointer"
+                            title="Aumentar (+) zoom"
+                          >
+                            <ZoomIn size={16} />
+                          </button>
+                          <button
+                            onClick={() => setZoomScale(1)}
+                            className="px-2 py-1 ml-1 hover:bg-stone-100 rounded text-[11px] font-semibold text-primary transition-colors cursor-pointer border-l border-stone-200"
+                            title="Restablecer a 100%"
+                          >
+                            1:1
+                          </button>
+                        </div>
+
+                        <a
+                          href="/bpmn-diagram.svg"
+                          download="BPMN_Gestion_Solicitud_Infraestructura.svg"
+                          className="p-2 bg-primary hover:bg-primary-hover text-white rounded-lg transition-colors shadow-sm"
+                          title="Descargar SVG original"
+                        >
+                          <Download size={16} />
+                        </a>
+
+                        <button 
+                          onClick={() => setIsZoomed(false)}
+                          className="p-2 bg-stone-200 hover:bg-stone-300 rounded-lg text-surface transition-colors cursor-pointer"
+                          title="Cerrar vista ampliada (Esc)"
+                        >
+                          <X size={18} />
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex-1 overflow-auto p-2 flex items-center justify-center bg-white rounded-lg">
-                      <img 
-                        src={imageSrc}
-                        alt="Diagrama BPMN ampliado" 
-                        referrerPolicy="no-referrer"
-                        className="w-full max-h-[75vh] object-contain"
-                      />
+
+                    {/* Canvas con scroll y zoom dinámico */}
+                    <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-white rounded-xl border border-stone-200 shadow-inner">
+                      <div 
+                        style={{ 
+                          transform: `scale(${zoomScale})`, 
+                          transformOrigin: 'center center',
+                          transition: 'transform 0.15s ease-out' 
+                        }}
+                        className="w-full flex items-center justify-center"
+                      >
+                        <img 
+                          src={imageSrc}
+                          alt="Diagrama BPMN ampliado" 
+                          referrerPolicy="no-referrer"
+                          className="w-full max-h-[78vh] object-contain select-none"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
