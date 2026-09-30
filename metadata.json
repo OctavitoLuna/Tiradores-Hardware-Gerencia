@@ -1,0 +1,8 @@
+{
+  "name": "Tiradores Hardware",
+  "description": "Sitio oficial del Equipo de Hardware e Infraestructura de Tiradores.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
