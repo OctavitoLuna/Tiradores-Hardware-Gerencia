@@ -126,7 +126,7 @@ export default function BPMN() {
           </div>
         </header>
 
-        <div className="container-wide max-w-5xl mt-16 space-y-24">
+        <div className="container-wide max-w-7xl mt-16 space-y-24">
 
           {/* 1.1 ¿Qué es BPMN? */}
           <FadeIn>

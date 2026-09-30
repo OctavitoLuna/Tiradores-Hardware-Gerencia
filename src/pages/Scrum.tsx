@@ -26,7 +26,7 @@ export default function Scrum() {
         </div>
       </header>
 
-      <div className="container-wide max-w-5xl mt-16 space-y-24">
+      <div className="container-wide max-w-6xl mt-16 space-y-24">
         
         {/* Intro */}
         <FadeIn>
