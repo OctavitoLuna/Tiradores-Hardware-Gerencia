@@ -1,15 +1,31 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { gsap } from '../lib/gsap';
 
 export default function AnimatedPage({ children }: { children: React.ReactNode }) {
+  const pageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = pageRef.current;
+    if (!el) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(el, { opacity: 1, y: 0 });
+      return;
+    }
+
+    const anim = gsap.fromTo(el,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.65, ease: "snappyUI" }
+    );
+
+    return () => {
+      anim.kill();
+    };
+  }, []);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
+    <div ref={pageRef} className="w-full">
       {children}
-    </motion.div>
+    </div>
   );
 }

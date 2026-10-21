@@ -1,45 +1,158 @@
 @import "tailwindcss";
 
 @theme {
+  --color-paper: #FAF5DC;
+  --color-ink: #0A0A0A;
+  --color-white: #FFFFFF;
+  --color-terracota: #C1522A;
+  --color-teal: #00C2CB;
+  --color-magenta: #FF3DCB;
+  --color-yellow: #FFE500;
+  --color-lime: #B6F23A;
+  --color-blue: #3B6BFF;
+  --color-violet: #7C6BFF;
+
   --color-primary: #C1522A;
-  --color-primary-hover: #a5411e;
-  --color-background: #F2EBDD;
-  --color-background-dark: #E6DECE;
-  --color-surface: #111111;
-  --color-foreground: #111111;
-  --color-foreground-muted: #444444;
-  --color-foreground-inverse: #F2EBDD;
+  --color-primary-hover: #A5411E;
+  --color-background: #FAF5DC;
+  --color-surface: #0A0A0A;
 
   --font-display: 'Oswald', sans-serif;
   --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --paper: #FAF5DC;
+  --ink: #0A0A0A;
+  --white: #FFFFFF;
+  --terracota: #C1522A;
+  --teal: #00C2CB;
+  --magenta: #FF3DCB;
+  --yellow: #FFE500;
+  --lime: #B6F23A;
+  --blue: #3B6BFF;
+  --violet: #7C6BFF;
 }
 
 @layer base {
+  * {
+    border-color: #0A0A0A;
+  }
+  
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+  }
+
+  /* Accessibility focus ring */
+  *:focus-visible {
+    outline: 3px solid #FFE500 !important;
+    outline-offset: 3px !important;
   }
 }
 
-/* Utilities for sections */
+/* Neo-Brutalist Utility Classes */
 @layer utilities {
-  .section-padding {
-    @apply py-16 md:py-24;
+  /* Solid Hard Shadows */
+  .shadow-brutal-sm {
+    box-shadow: 3px 3px 0 #0A0A0A;
   }
-  .container-wide {
-    @apply w-full max-w-[1680px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16;
+  .shadow-brutal {
+    box-shadow: 6px 6px 0 #0A0A0A;
   }
-  .btn-primary {
-    @apply inline-flex items-center justify-center bg-primary text-foreground-inverse px-6 py-3 rounded-full font-sans font-semibold uppercase tracking-wider text-sm transition-colors hover:bg-primary-hover;
+  .shadow-brutal-lg {
+    box-shadow: 9px 9px 0 #0A0A0A;
   }
-  .btn-secondary {
-    @apply inline-flex items-center justify-center bg-surface text-foreground-inverse px-6 py-3 rounded-full font-sans font-semibold uppercase tracking-wider text-sm transition-colors hover:bg-gray-800;
+  .shadow-brutal-xl {
+    box-shadow: 12px 12px 0 #0A0A0A;
+  }
+
+  /* Interactive Button & Card Movements */
+  .brutal-btn-hover {
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .brutal-btn-hover:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 #0A0A0A;
+  }
+  .brutal-btn-hover:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 #0A0A0A;
+  }
+
+  .brutal-card-hover {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .brutal-card-hover:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 9px 9px 0 #0A0A0A;
+  }
+  .brutal-card-hover:active {
+    transform: translate(2px, 2px);
+    box-shadow: 3px 3px 0 #0A0A0A;
+  }
+
+  /* Background Dots & Grids */
+  .bg-dots {
+    background-image: radial-gradient(#0A0A0A 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+  .bg-dots-dense {
+    background-image: radial-gradient(#0A0A0A 1.2px, transparent 1.2px);
+    background-size: 14px 14px;
+  }
+  .bg-grid-pattern {
+    background-size: 32px 32px;
+    background-image: 
+      linear-gradient(to right, rgba(10, 10, 10, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.08) 1px, transparent 1px);
+  }
+
+  /* Folder Tab Styles */
+  .folder-notch {
+    position: relative;
+  }
+  .folder-notch::before {
+    content: '';
+    position: absolute;
+    top: -14px;
+    left: 20px;
+    width: 90px;
+    height: 14px;
+    background-color: inherit;
+    border-top: 3px solid #0A0A0A;
+    border-left: 3px solid #0A0A0A;
+    border-right: 3px solid #0A0A0A;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Custom Scrollbars */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FAF5DC;
+    border-left: 3px solid #0A0A0A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #C1522A;
+    border: 2px solid #0A0A0A;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FFE500;
   }
 }

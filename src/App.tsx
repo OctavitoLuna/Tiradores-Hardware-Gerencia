@@ -10,6 +10,8 @@ import MBTI from './pages/MBTI';
 import Scrum from './pages/Scrum';
 import IDEF0 from './pages/IDEF0';
 import BPMN from './pages/BPMN';
+import Monitoreo from './pages/Monitoreo';
+import Contacto from './pages/Contacto';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="scrum" element={<Scrum />} />
           <Route path="idef0" element={<IDEF0 />} />
           <Route path="bpmn" element={<BPMN />} />
+          <Route path="monitoreo" element={<Monitoreo />} />
+          <Route path="contacto" element={<Contacto />} />
         </Route>
       </Routes>
     </BrowserRouter>

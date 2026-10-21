@@ -1,101 +1,61 @@
 import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, X, Cpu } from 'lucide-react';
-import { cn } from '../lib/utils';
+import { Outlet, Link } from 'react-router-dom';
+import Navbar, { navLinks } from './Navbar';
+import CustomCursor from './CustomCursor';
+import Preloader from './Preloader';
+import SideTelemetryRails from './SideTelemetryRails';
+import { ArrowRight } from 'lucide-react';
 
 export default function Layout() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const location = useLocation();
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const navLinks = [
-    { name: 'Inicio', path: '/' },
-    { name: 'Gestión de Tecnología', path: '/gestion-tecnologia' },
-    { name: 'Ciencia, Tecnología e Innovación', path: '/ciencia-tecnologia-innovacion' },
-    { name: 'Misión y Visión', path: '/mision-vision' },
-    { name: 'Organigrama', path: '/organigrama' },
-    { name: 'MBTI', path: '/mbti' },
-    { name: 'Scrum', path: '/scrum' },
-    { name: 'IDEF0', path: '/idef0' },
-    { name: 'BPMN', path: '/bpmn' },
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Navbar */}
-      <header className="sticky top-0 z-50 bg-background border-b border-gray-300">
-        <div className="container-wide py-4 flex items-center justify-between">
-          <Link to="/" className="text-2xl font-display font-bold tracking-wider flex items-center gap-2 group">
-            <Cpu size={28} className="text-primary group-hover:rotate-12 transition-transform" />
-            Tiradores
-          </Link>
+    <div className="min-h-screen flex flex-col relative selection:bg-primary selection:text-white">
+      {/* Cinematic Custom Cursor (Desktop) */}
+      <CustomCursor />
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.path} 
-                to={link.path}
-                className={cn(
-                  "text-sm font-sans font-medium hover:text-primary transition-colors py-2 relative",
-                  location.pathname === link.path ? "text-primary" : "text-foreground"
-                )}
-              >
-                {link.name}
-                {location.pathname === link.path && (
-                  <span className="absolute bottom-[-17px] left-0 w-full h-[3px] bg-primary rounded-t-md"></span>
-                )}
-              </Link>
-            ))}
-          </nav>
+      {/* Cinematic App Preloader (Intro only) */}
+      <Preloader />
 
-          {/* Mobile Menu Toggle */}
-          <button className="lg:hidden p-2" onClick={toggleMenu}>
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+      {/* High-Tech Telemetry Side Rails on Viewport Flanks */}
+      <SideTelemetryRails />
 
-        {/* Mobile Nav */}
-        {isMenuOpen && (
-          <nav className="lg:hidden bg-background-dark p-6 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.path} 
-                to={link.path}
-                className={cn(
-                  "text-lg font-display tracking-wide uppercase hover:text-primary transition-colors",
-                  location.pathname === link.path ? "text-primary border-l-4 border-primary pl-2" : "text-foreground"
-                )}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-        )}
-      </header>
+      {/* Subtle Noise Texture Overlay */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 pointer-events-none z-[-1] noise-overlay opacity-60"
+      />
 
-      {/* Main Content */}
-      <main className="flex-1">
+      {/* Redesigned Floating Navbar */}
+      <Navbar />
+
+      {/* Main Content Area with top offset for floating navbar and architectural side framing */}
+      <main className="flex-1 pt-24 sm:pt-28 relative">
         <Outlet />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-surface text-foreground-inverse py-16">
+      {/* Footer - All texts and links preserved identically */}
+      <footer className="bg-surface text-foreground-inverse py-16 border-t border-neutral-800 relative z-10">
         <div className="container-wide grid grid-cols-1 md:grid-cols-3 gap-12">
           <div className="col-span-1 md:col-span-2">
             <h2 className="text-4xl font-display mb-4">Tiradores</h2>
-            <p className="text-gray-400 max-w-sm">
+            <p className="text-gray-400 max-w-sm mb-6">
               Construimos la base física que sostiene la salud digital. Equipo de Hardware e Infraestructura, IA MediTech.
             </p>
+            <Link
+              to="/contacto"
+              className="btn-primary inline-flex items-center gap-2 text-xs py-2.5 px-6 uppercase tracking-wider font-semibold shadow-hard-orange hover:scale-105 transition-transform"
+            >
+              <span>Contáctanos</span>
+              <ArrowRight size={14} />
+            </Link>
           </div>
           <div>
             <h3 className="text-xl font-display mb-4 text-primary">Navegación</h3>
             <ul className="flex flex-col gap-2 text-gray-400">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="hover:text-white transition-colors">{link.name}</Link>
+                  <Link to={link.path} className="hover:text-white transition-colors">
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
