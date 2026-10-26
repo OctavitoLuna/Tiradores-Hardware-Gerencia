@@ -19,6 +19,7 @@ export const navLinks: NavLinkItem[] = [
   { name: 'IDEF0', path: '/idef0' },
   { name: 'BPMN', path: '/bpmn' },
   { name: 'Monitoreo', path: '/monitoreo' },
+  { name: 'Servicios Externos', path: '/servicios-externos' },
   { name: 'Contacto', path: '/contacto' },
 ];
 
@@ -306,7 +307,7 @@ export default function Navbar() {
                   key={link.path}
                   to={link.path}
                   data-path={link.path}
-                  className={`nav-link-item relative px-2.5 2xl:px-3 py-1.5 rounded-full text-[11px] 2xl:text-[13px] font-sans font-medium transition-colors z-10 whitespace-nowrap ${
+                  className={`nav-link-item relative px-2 2xl:px-3 py-1.5 rounded-full text-[11px] 2xl:text-[12.5px] font-sans font-medium transition-colors z-10 whitespace-nowrap ${
                     isActive
                       ? "text-primary font-semibold"
                       : "text-gray-300 hover:text-white hover:bg-white/5"

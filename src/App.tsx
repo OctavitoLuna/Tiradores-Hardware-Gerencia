@@ -11,6 +11,7 @@ import Scrum from './pages/Scrum';
 import IDEF0 from './pages/IDEF0';
 import BPMN from './pages/BPMN';
 import Monitoreo from './pages/Monitoreo';
+import ServiciosExternos from './pages/ServiciosExternos';
 import Contacto from './pages/Contacto';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="idef0" element={<IDEF0 />} />
           <Route path="bpmn" element={<BPMN />} />
           <Route path="monitoreo" element={<Monitoreo />} />
+          <Route path="servicios-externos" element={<ServiciosExternos />} />
           <Route path="contacto" element={<Contacto />} />
         </Route>
       </Routes>
